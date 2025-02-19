@@ -7,6 +7,7 @@ import TaskDialog from './TaskDialog';
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FaList } from 'react-icons/fa';
 import UserInfo from '../components/UserInfo';
+import {IoMdAdd, IoMdAddCircle} from 'react-icons/io';
 
 const ICONS = {
 high: <MdKeyboardDoubleArrowUp />,
@@ -33,7 +34,6 @@ const TaskCard = ({task}) => {
                 <div className={clsx("w-4  h-4 rounded-full",TASK_TYPE[task.stage])}/>
                 {/* Line-clamp-1 it will adjust text content to keep in 1 line and remaining as ... */}
                 <h4 className='line-clamp-1'>{task?.title}</h4>
-                
             </div>
             
             <span className='text-sm text-gray-600'>
@@ -63,6 +63,39 @@ const TaskCard = ({task}) => {
                             ))}
                 </div>
             </div>
+
+                {/* Sub Task */} 
+                {
+                    task?.subTasks?.length>0 ? 
+                    <div className='py-4 border-t border-gray-200'>
+                        <h5 className='text-base line-clamp-1'>
+                            {
+                                task?.subTasks[0].title
+                            }
+                        </h5>
+                        <div className='p-4 space-x-8 '>
+                            <span className='text-sm text-gray-600'>
+                                {formatDate(new Date(task?.subTasks[0]?.date))}
+                            </span>
+                            <span className='bg-blue-600/10 px-3 py-1 rounded-full text-blue-700 font-medium'>{task?.subTasks[0]?.tag}</span>
+                        </div>
+
+                    </div>
+                    :
+                    (
+                        <div className='py-4 border-t border-gray-200'>
+                            <span className='text-gray-400'>No Sub Task</span>
+                        </div>
+                    )
+                }
+                {/* Add SubTask */}
+                <div className='w-full'>
+                    <button className='w-full flex gap-4 items-center text-sm text-gray-500 font-semibold disabled:cursor-not-allowed disabled::text-gray-300'>        
+                        <IoMdAdd className='text-lg' />
+                        <span>Add SubTask</span>
+                    </button>
+                </div>
+                {/* <AddSubtask/> */}
         </>
         </div>
 

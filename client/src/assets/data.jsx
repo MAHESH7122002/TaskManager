@@ -875,12 +875,6 @@ export const summary = {
         },
       ],
       subTasks: [
-        {
-          title: "Check Login code and fix bugs asap",
-          date: "2024-02-08T00:00:00.000Z",
-          tag: "Bug Fixing",
-          _id: "65c46074af6ec0118be94094",
-        },
       ],
       createdAt: "2024-02-08T04:28:31.966Z",
       updatedAt: "2024-02-09T06:51:15.005Z",

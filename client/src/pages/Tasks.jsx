@@ -10,6 +10,7 @@ import Tabs from '../components/Tabs';
 import TaskTitle from '../components/TaskTitle';
 import BoardView from '../components/BoardView';
 import {tasks} from '../assets/data'
+import Table from '../components/task/Table';
 
 const TABS = [
   {title:"Board View", icon:<MdGridView/>},
@@ -61,18 +62,16 @@ const Tasks = () => {
                 <TaskTitle label="To Do" className={TASK_TYPE.todo} />
                 <TaskTitle label="In Progress" className={TASK_TYPE['in progress']} />
                 <TaskTitle label="Completed" className={TASK_TYPE.completed} />
-
               </div>
             )
           }
           {
-            selected === 0 ? 
-            <div>
-              <BoardView tasks={tasks}/>
-            </div>
+           
+            selected != 1 ? 
+            (<BoardView tasks={tasks}/>)
             :
             <div>
-
+              <Table tasks={tasks}/>
             </div>
           }
         </Tabs>
