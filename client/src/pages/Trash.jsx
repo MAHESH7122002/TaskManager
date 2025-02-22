@@ -90,7 +90,7 @@ const Trash = () => {
       </td>
       <td className='py-2 text-sm'>{new Date(item?.date).toDateString()}</td>
 
-      <td className='py-2 flex gap-1 justify-between'>
+      <td className='py-2 flex gap-1 justify-between~'>
         <Button
           icon={<MdOutlineRestore className='text-xl text-gray-500' />}
           onClick={() => restoreClick(item._id)}

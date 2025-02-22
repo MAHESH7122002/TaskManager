@@ -1,0 +1,8 @@
+{
+    "workbench.editor.autoLockGroups": {
+        "imagePreview.previewEditor": true
+    },
+    "editor.inlineSuggest.suppressSuggestions": false,
+    "tailwindCSS.suggestions": true,
+    "github.copilot.nextEditSuggestions.enabled": false
+}
