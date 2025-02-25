@@ -3,11 +3,12 @@ import { TASK_TYPE, PRIOTITYSTYELS, formatDate, getInitials, BGS } from '../util
 import { MdAttachFile, MdKeyboardArrowDown, MdKeyboardArrowUp, MdKeyboardDoubleArrowUp } from 'react-icons/md';
 import {useSelector} from 'react-redux';
 import clsx from 'clsx';
-import TaskDialog from './TaskDialog';
+import TaskDialog from './task/TaskDialog';
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FaList } from 'react-icons/fa';
 import UserInfo from '../components/UserInfo';
 import {IoMdAdd, IoMdAddCircle} from 'react-icons/io';
+import AddSubTask from './task/AddSubTask';
 
 const ICONS = {
 high: <MdKeyboardDoubleArrowUp />,
@@ -26,7 +27,7 @@ const TaskCard = ({task}) => {
                     <span className='uppercase'>{task?.priority} Priority</span>
                 </div>
                 {
-                    user?.isAdmin && <TaskDialog task={task}/>
+                    !user?.isAdmin && <TaskDialog task={task}/>
                 }
             </div>
             <>
@@ -90,12 +91,14 @@ const TaskCard = ({task}) => {
                 }
                 {/* Add SubTask */}
                 <div className='w-full'>
-                    <button className='w-full flex gap-4 items-center text-sm text-gray-500 font-semibold disabled:cursor-not-allowed disabled::text-gray-300'>        
+                    <button 
+                    onClick={()=>setOpen(true)}
+                    className='w-full flex gap-4 items-center text-sm text-gray-500 font-semibold disabled:cursor-not-allowed disabled::text-gray-300'>        
                         <IoMdAdd className='text-lg' />
                         <span>Add SubTask</span>
                     </button>
                 </div>
-                {/* <AddSubtask/> */}
+                <AddSubTask open={open} setOpen={setOpen} id={task._id} />
         </>
         </div>
 
