@@ -11,12 +11,11 @@ const userSchema = new Schema({
     tasks: [{
         type:Schema.Types.ObjectId, ref:"Task"
     }],
-    isActive: {type:Boolean,required:true,default:false},
+    isActive: {type:Boolean,required:true,default:true},
 },
     {timestamps:true}
 )
-
-const User = mongoose.model("User",userSchema);
+;
 
 userSchema.pre("save", async function(next){
     if(!this.isModified("password")){
@@ -26,8 +25,8 @@ userSchema.pre("save", async function(next){
     this.password = await bcrypt.hash(this.password,salt);
 })
 
-userSchema.method.matchPassword = async function(enteredPassword){
+userSchema.methods.matchPassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password);
 }
-
+const User = mongoose.model("User",userSchema)
 export default User;

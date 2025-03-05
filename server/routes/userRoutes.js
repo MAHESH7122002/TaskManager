@@ -1,6 +1,6 @@
 import express from 'express';
 import {isAdminRoute,protectRoute} from '../middlewares/authMiddleware.js';
-import { activateUserProfile, changeUserPassword, getNotificationsList, getTeamList, loginUser, logoutUser, markNotificationRead, registerUser, updateUserProfile } from '../controllers/userController.js';
+import { activateUserProfile, changeUserPassword, deleteUserProfile, getNotificationsList, getTeamList, loginUser, logoutUser, markNotificationRead, registerUser, updateUserProfile } from '../controllers/userController.js';
 const router = express.Router();
 
 router.post("/register",registerUser);

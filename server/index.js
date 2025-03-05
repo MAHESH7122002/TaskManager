@@ -15,7 +15,7 @@ dbConnection();
 
 const PORT = process.env.PORT || 5000; // Define the port to run the server
 
-const routes = ""; // Placeholder for routes
+// const routes = ""; // Placeholder for routes
 
 const app = express(); // Create an instance of Express
 

@@ -3,18 +3,23 @@ import User from '../models/user.js'
 
 const protectRoute = async (req,res,next) => {
     try{
-        let token = req.cookie.token;
+        let token = req.cookies.token;
+        console.log(token);
         if(token){
             const decodedToken = jwt.verify(token,process.env.JWT_SECRET);
             const resp = await User.findById(decodedToken.userId)
             .select("isAdmin email");
-
+            console.log(resp)
             req.user = {
                 email: resp.email,
                 isAdmin: resp.isAdmin,
                 userId: decodedToken.userId,
             }
             next();
+        } else {
+            res.status(404).json({
+                message:"Not authorized",status:false
+            })
         }
     } catch(error){
         console.error(error)
@@ -26,7 +31,8 @@ const protectRoute = async (req,res,next) => {
 }
 
 const isAdminRoute = (req,res,next) => {
-    if(req.user && req.isAdmin){
+    console.log(req.user,req.isAdmin);
+    if(req.user && req.user.isAdmin){
         next();
     } else {
         return res.status(401).json({

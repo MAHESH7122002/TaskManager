@@ -11,9 +11,10 @@ const errorHandler = (err,req,res,next) =>{
         statusCode = 404;
         message = "Status Not Found";
     }
+    console.log(err.stack)
     res.status(statusCode).json({
         message:message,
-        stack: process.env.NODE_ENV !== "production" ? null : err.stack
+        stack: process.env.NODE_ENV === "production" ? null : err.stack
     })
 }
 export {routeNotFound,errorHandler};

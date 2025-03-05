@@ -1,7 +1,6 @@
-import { use } from "react";
-import Notice from "../models/notification";
-import User from "../models/user";
-import { createJWT } from "../utils";
+import Notice from "../models/notification.js";
+import User from "../models/user.js";
+import { createJWT } from "../utils/index.js";
 
 export const registerUser = async (req, res) => {
   try {
@@ -214,3 +213,4 @@ export const deleteUserProfile = async (req, res) => {
       return res.status(400).json({ status: false, message: error.message });
     }
   };
+
