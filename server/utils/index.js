@@ -19,7 +19,6 @@ export const createJWT = (res,userId)=>{
         httpOnly:true,
         secure: process.env.NODE_ENV !== "development",
         sameSite: "strict", //Prevents CSRF attacks
-        maxAge: 1* 24 * 60 * 60 * 1000 //1 Dayc
-
+        maxAge: 1* 24 * 60 * 60 * 1000 //1 Days
     })
 }

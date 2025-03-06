@@ -21,7 +21,7 @@ const app = express(); // Create an instance of Express
 
 // Enable CORS for specified origins and methods
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: ['http://localhost:3000', 'http://localhost:5173'],
     methods: ["GET","POST","PUT","DELETE"],
     credentials: true,
 }));
