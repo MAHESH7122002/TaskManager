@@ -14,6 +14,8 @@ import { getInitials } from "../utils";
 import { toast } from "sonner";
 import { useLogoutMutation } from "../redux/slices/api/authApiSlice";
 import { logout } from "../redux/slices/authSlice";
+import AddUser from './AddUser';
+import ChangePassword from "./ChangePassword";
 
 const UseAvatar = () => {
   const [open, setOpen] = useState(false);
@@ -72,7 +74,7 @@ const UseAvatar = () => {
                 <MenuItem>
                   {({ active }) => (
                     <button
-                      onClick={() => setOpen(true)}
+                      onClick={() => setOpenPassword(true)}
                       className="text-gray-700 dark:text-gray-300 group flex w-full items-center rounded-md px-2 py-2 text-base"
                     >
                       <FaUserLock className="mr-2 aria-hidden:true" />
@@ -96,6 +98,8 @@ const UseAvatar = () => {
           </Transition>
         </Menu>
       </div>
+      <AddUser open={open} setOpen={setOpen} userData={user}/>
+      <ChangePassword open={openPassword} setOpen={setOpenPassword}/>
     </>
   );
 };
