@@ -22,8 +22,25 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    
+    deleteUser: builder.mutation({
+        query: (id) => ({
+          url: `${USER_URL}/${id}`,
+          method: "DELETE",
+          credentials: "include",
+        }),
+      }),
+      
+    userAction: builder.mutation({
+        query: (data) => ({
+          url: `${USER_URL}/${data.id}`,
+          method: "PUT",
+          body: data,
+          credentials: "include",
+        }),
+      }),
   }),
 });
 
 // Export the hook for the login mutation
-export const { useUpdateUserMutation, useGetTeamListQuery } = userApiSlice;
+export const { useUpdateUserMutation, useGetTeamListQuery, useDeleteUserMutation, useUserActionMutation } = userApiSlice;

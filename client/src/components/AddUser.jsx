@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../redux/slices/api/authApiSlice";
 import { toast } from "sonner";
 import { useUpdateUserMutation } from "../redux/slices/api/userApiSlice";
+import { setCredentials } from "../redux/slices/authSlice";
 
 const AddUser = ({ open, setOpen, userData }) => {
   let defaultValues = userData ?? {};
@@ -36,6 +37,7 @@ const AddUser = ({ open, setOpen, userData }) => {
       }else{
         const result = await addNewUser({...data,password:data.email}).unwrap();
         toast.success("New User Added Successfully");
+      
       }
       setTimeout(() => {
         setOpen(false);

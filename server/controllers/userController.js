@@ -102,6 +102,7 @@ export const getNotificationsList = async (req, res) => {
 
 export const updateUserProfile = async (req, res) => {
   try {
+    console.log(req.user)
     const { userId, isAdmin } = req.user;
     const { _id } = req.body;
     const id =
@@ -115,7 +116,8 @@ export const updateUserProfile = async (req, res) => {
       user.name = req.body.name || user.name;
       user.title = req.body.title || user.title;
       user.role = req.body.role || user.role;
-      const updatedUser = await User.save();
+
+      const updatedUser = await user.save();
       user.password = undefined;
       res.status(201).json({
         status: true,
