@@ -126,7 +126,7 @@ export const postTaskActivity = async (req, res) => {
 export const dashboardStatistics = async (req, res) => {
   try {
     const { userId, isAdmin } = req.user;
-
+    console.log("Dashboard");
     const allTasks = isAdmin
       ? await Task.find({
           isTrashed: false,
@@ -147,7 +147,7 @@ export const dashboardStatistics = async (req, res) => {
           .sort({ _id: -1 });
 
     const users = await User.find({ isActive: true })
-      .select("name title role isAdmin createdAt")
+      .select("name title role isAdmin isActive createdAt")
       .limit(10)
       .sort({ _id: -1 });
 
@@ -215,7 +215,6 @@ export const getTasks = async (req, res) => {
       .sort({ _id: -1 });
 
     const tasks = await queryResult;
-
     res.status(200).json({
       status: true,
       tasks,
@@ -229,7 +228,7 @@ export const getTasks = async (req, res) => {
 export const getTask = async (req, res) => {
   try {
     const { id } = req.params;
-
+    console.log(id);
     const task = await Task.findById(id)
       .populate({
         path: "team",

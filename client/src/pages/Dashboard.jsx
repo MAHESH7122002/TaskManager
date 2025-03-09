@@ -14,8 +14,9 @@ import clsx from "clsx";
 import { Chart } from "../components/Chart";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 import UserInfo from '../components/UserInfo';
+import { useGetDashboardStatsQuery } from '../redux/slices/api/taskApiSlice';
+import {Loading} from '../components/Loading';
 // import UserInfo from "../components/UserInfo";
-
 
 const UserTable = ({users})=>{
 
@@ -148,33 +149,41 @@ const TaskTable = ({ tasks }) => {
 }
 
 const Dashboard = () => {
-  const totals = summary.tasks;
+  
+  const {data,isLoading,error }= useGetDashboardStatsQuery();
+  console.log(data);
+  const totals = data?.tasks;
+  if(isLoading){
+    return (
+      <div className='py-10'><Loading/></div>
+    )
+  }
   const stats = [
     {
       _id: "1",
       label: "TOTAL TASK",
-      total: summary?.totalTasks || 0,
+      total: data?.totalTasks || 0,
       icon: <FaNewspaper />,
       bg: "bg-[#1d4ed8]",
     },
     {
       _id: "2",
       label: "COMPLTED TASK",
-      total: totals["completed"] || 0,
+      total: totals?.["completed"] || 0,
       icon: <MdAdminPanelSettings />,
       bg: "bg-[#0f766e]",
     },
     {
       _id: "3",
       label: "TASK IN PROGRESS ",
-      total: totals["in progress"] || 0,
+      total: totals?.["in progress"] || 0,
       icon: <LuClipboardPen />,
       bg: "bg-[#f59e0b]",
     },
     {
       _id: "4",
       label: "TODOS",
-      total: totals["todo"],
+      total: totals?.["todo"],
       icon: <FaArrowsToDot />,
       bg: "bg-[#be185d]" || 0,
     },
@@ -219,16 +228,16 @@ const Dashboard = () => {
       {/* Charts */}
       <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
         <h4 className='text-gray-600 text-xl font-semibold'>Chart by Priorty</h4>
-        <Chart/>
+        <Chart chartData={data?.graphData}/>
       </div>
 
       <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
           {/* Left */}
             <TaskTable
-            tasks = {summary.last10Task}/>
+            tasks = {data?.last10Task}/>
             
           {/* Right */}
-          <UserTable users={summary.users}/>
+          <UserTable users={data?.users}/>
 
       </div>
 
