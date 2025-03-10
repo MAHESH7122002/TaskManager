@@ -55,11 +55,12 @@ export const duplicateTask = async (req, res) => {
     const { id } = req.params;
 
     const task = await Task.findById(id);
-
+console.log(task);
     const newTask = await Task.create({
       ...task,
       title: task.title + " - Duplicate",
     });
+    console.log(newTask);
 
     newTask.team = task.team;
     newTask.subTasks = task.subTasks;

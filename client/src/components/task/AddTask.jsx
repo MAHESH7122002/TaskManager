@@ -82,7 +82,7 @@ const AddTask = ({ open, setOpen }) => {
     const uploadTask = uploadBytesResumable(storageRef,file);
     return new Promise((resolve,reject)=>{
       uploadTask.on(
-        'state_chnaged',
+        'state_changed',
         (snapshot)=>{
           console.log("Uploading...");
         },(error)=>{
